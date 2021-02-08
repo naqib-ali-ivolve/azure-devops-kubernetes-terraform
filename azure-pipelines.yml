@@ -10,15 +10,18 @@ stages:
   - job: Firstjob
     steps:
     - bash: echo build Firstjob
+    - bash: echo $(xvariable)
   - job: Secondjob
     steps:
     - bash: echo build Firstjob
 - stage: DevDeploy
   dependsOn: Build
+  variables:
+    environment: Dev
   jobs:
   - job: DevDeployJob
     steps:
-    - bash: echo build DevDeploy
+    - bash: echo build $(environment)Deploy
 - stage: QADeploy
   dependsOn: Build
   jobs:
